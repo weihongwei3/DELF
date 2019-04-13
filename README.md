@@ -1,4 +1,4 @@
-﻿@[TOC](Windows环境下在pycharm中加载DELF模型)
+@[TOC](Windows环境下在pycharm中加载DELF模型)
 
 # 一、说明
 操作系统：win10（Linux教程可见官方说明，此为Windows环境下的操作）
@@ -7,8 +7,11 @@ python版本：3.6.8（anaconda环境）
 TensorFlow版本：1.13.1
 
 >项目地址：[TensorFlow](https://github.com/tensorflow/models)  || [DELF](https://github.com/tensorflow/models/tree/master/research/delf)
+
 >ps:学好英语很重要
+
 >ps:科学上网很重要
+
 >初入深度学习，可能有解释不正确的地方，欢迎指正
 
 ---
@@ -48,8 +51,11 @@ PATH_TO_PROTOC=`pwd`
 添加bin目录绝对路径至环境变量
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413171038325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413171110570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
+
 安装protocol编译器成功后，检测
+
 ![sa ](https://img-blog.csdnimg.cn/20190413175309720.png)
+
 表示安装成功
 注：protoc编译器容易因为版本出现众多问题，后续出现问题可降为3.4.0
 ## Python dependencies
@@ -138,6 +144,7 @@ protoc object_detection/protos/*.proto --python_out=.
 4. 将库添加到PYTHONPATH
 在本地运行时，tensorflow/models/research/ 和 slim目录应该附加到PYTHONPATH。
 之前已经把tensorflow/models/research/ 目录的绝对路径添加进PYTHONPATH环境变量，现在再添加tensorflow/models/research/slim
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413194424242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 
 5. 测试
@@ -186,8 +193,10 @@ DELF的代码位于delf目录下。其中有两个目录，protos和python。
 1. 下载[数据集](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/oxbuild_images.tgz)
 在tensorflow/models/research/delf/delf/python/examples/下新建data文件夹，进入data文件夹，再在data文件夹里新建oxford5k_images 和 oxford5k_features文件夹，把数据集解压到oxford5k_images里，以上是官方介绍。
 其实就是下载了一堆相关照片，选两张来测试。在examples下建一个文件夹test_images，放两张图片，我选的all_souls_000006.jpg和all_souls_000013.jpg。
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183956617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2019041318401217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
+
 新建一个list_images.txt放两张图片的URL，添加URL
 可以采用命令行方式：
 ```
@@ -208,9 +217,11 @@ test_images/image_2.jpg
 
 ## DELF feature extraction
 pycharm里打开项目，项目结构：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183710528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 
 运行extract_features.py，提取两张图片的特征，生成两个“.delf”文件存储特征
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183331296.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183315821.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183542290.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
