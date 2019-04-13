@@ -1,4 +1,5 @@
-@[TOC](Windows环境下在pycharm中加载DELF模型)
+官方文档见[delf.md](https://github.com/weihongwei3/DELF/blob/master/delf.md)
+下为Windows环境下从github拿到代码并且调试运行成功的过程详解，理解错误之处欢迎指正。
 
 # 一、说明
 操作系统：win10（Linux教程可见官方说明，此为Windows环境下的操作）
@@ -7,11 +8,8 @@ python版本：3.6.8（anaconda环境）
 TensorFlow版本：1.13.1
 
 >项目地址：[TensorFlow](https://github.com/tensorflow/models)  || [DELF](https://github.com/tensorflow/models/tree/master/research/delf)
-
 >ps:学好英语很重要
-
 >ps:科学上网很重要
-
 >初入深度学习，可能有解释不正确的地方，欢迎指正
 
 ---
@@ -228,8 +226,11 @@ pycharm里打开项目，项目结构：
 
 ## Image matching using DELF features
 提取特征后，运行match_images.py匹配两张图的特征点
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183904441.png)
+
 并生成了匹配图 matched_images.png
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413184058189.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 
 ---
@@ -238,19 +239,24 @@ pycharm里打开项目，项目结构：
 # 五、BUG
 初入深度学习，踩坑无数，由于未做及时记录，有些排除了就忘记了，想起来再随时更新吧
 1. object_detection/protos/*.proto: No such file or directory
+
 使用proto编译，如果报错，很可能就是版本问题，目前最新版3.7.1编译时会报no such directory，解决方法就是降版本，用3.4.0版本的编译器可以成功编译。**但是**！编译完以后，再换回3.7.1版本，因为项目中使用TensorFlow要用高版本，高版本TensorFlow要求protobuf包高于3.5版本，最好就用最新的，然后proto编译器要和protobuf包的版本一致，不然项目运行时会报错。不知道自己理解的对不对，总之最后是采用这种奇葩的方式解决了问题。
 **换proto编译器版本的时候别忘了改环境变量并保存，再新开cmd编译**
 
 2. Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+
 表示你的机器CPU可以支持，但是目前的TensorFlow不支持，可以忽略，反正能跑，如果要解决，就是下源码自行编译，详情自行百度。
 
 3. MetaGraphDef associated with tags 'serve' could not be found in SavedModel.To inspect available tag-sets in...
 please use the SavedModel CLI: `saved_model_cli_'
+
 没下载DELF模型的时候出的错误，重新查看步骤，肯定有漏的
 
 4. Cannot parse file b'parameters/delf_v1_20171026/model/saved_model.pb': Error
+
 没下载模型
 
 5. Process finished with exit code -1073741819 (0xC0000005)
+
 两张图片URL用了https，改用本地图片解决。如果你是其它项目和问题遇到这个错误码，
 见[pycharm报错：Process finished with exit code -1073741819 (0xC0000005)](https://blog.csdn.net/qiao1025566574/article/details/81037908)，差不多可能的情况全了
