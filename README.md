@@ -1,15 +1,22 @@
 官方文档见[delf.md](https://github.com/weihongwei3/DELF/blob/master/delf.md)
+
 下为Windows环境下从github拿到代码并且调试运行成功的过程详解，理解错误之处欢迎指正。
 
 # 一、说明
 操作系统：win10（Linux教程可见官方说明，此为Windows环境下的操作）
+
 编译器：pycharm
+
 python版本：3.6.8（anaconda环境）
+
 TensorFlow版本：1.13.1
 
 >项目地址：[TensorFlow](https://github.com/tensorflow/models)  || [DELF](https://github.com/tensorflow/models/tree/master/research/delf)
+
 >ps:学好英语很重要
+
 >ps:科学上网很重要
+
 >初入深度学习，可能有解释不正确的地方，欢迎指正
 
 ---
@@ -43,8 +50,11 @@ unzip protoc-3.3.0-linux-x86_64.zip
 PATH_TO_PROTOC=`pwd`
 ```
 对于Windows：
+
 下载proto编译器
+
 [protoc-3.7.1-win64.zip](https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protoc-3.7.1-win64.zip)
+
 [protoc-3.7.1-win32.zip](https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protoc-3.7.1-win32.zip)
 添加bin目录绝对路径至环境变量
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413171038325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
@@ -81,6 +91,7 @@ git clone https://github.com/tensorflow/models
 pip install -e .
 ```
 第二，通过编辑PYTHONPATH设置object_detection模块：
+
 新建PYTHONPATH环境变量，添加 tensorflow/models/research/  文件夹的绝对路径
 
 然后，编译DELF的protobufs
@@ -120,7 +131,7 @@ Tensorflow Object Detection API depends on the following libraries:
 - contextlib2
 - cocoapi
 
-1.  安装TensorFlow，之前已安装
+1. 安装TensorFlow，之前已安装
 2. 其他依赖库
 ```
 pip install --user Cython
@@ -141,6 +152,7 @@ protoc object_detection/protos/*.proto --python_out=.
 
 4. 将库添加到PYTHONPATH
 在本地运行时，tensorflow/models/research/ 和 slim目录应该附加到PYTHONPATH。
+
 之前已经把tensorflow/models/research/ 目录的绝对路径添加进PYTHONPATH环境变量，现在再添加tensorflow/models/research/slim
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413194424242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
@@ -189,13 +201,16 @@ DELF的代码位于delf目录下。其中有两个目录，protos和python。
 ## dateset&DELF model
 
 1. 下载[数据集](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/oxbuild_images.tgz)
+
 在tensorflow/models/research/delf/delf/python/examples/下新建data文件夹，进入data文件夹，再在data文件夹里新建oxford5k_images 和 oxford5k_features文件夹，把数据集解压到oxford5k_images里，以上是官方介绍。
+
 其实就是下载了一堆相关照片，选两张来测试。在examples下建一个文件夹test_images，放两张图片，我选的all_souls_000006.jpg和all_souls_000013.jpg。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413183956617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2019041318401217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDg5NDk3OA==,size_16,color_FFFFFF,t_70)
 
 新建一个list_images.txt放两张图片的URL，添加URL
+
 可以采用命令行方式：
 ```
 # 进入  tensorflow/models/research/delf/delf/python/examples/ 文件夹
@@ -210,6 +225,7 @@ test_images/image_2.jpg
 在博客“[图像检索中的DELF模型（DEep Local Features）实践](https://blog.csdn.net/sparkexpert/article/details/80590452)”中博主用了两个https链接，但是我用的时候会异常退出，最终是用了两个本地图，解决。
 
 2.  此外，还需要下载训练好的的DELF模型：
+
 下载[模型]( http://download.tensorflow.org/models/delf_v1_20171026.tar.gz)
 进入tensorflow/models/research/delf/delf/python/examples/文件夹，新建parameters文件夹并将模型压缩包解压到其中
 
